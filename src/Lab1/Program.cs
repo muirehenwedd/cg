@@ -9,4 +9,4 @@ var scene = new SimpleScene();
 // var camera=new Camera(...);
 // scene.SetCamera(camera);
 
-ConsoleDisplay.Display(scene.Render()); // This actually will crush until we wont complete all 'to do' sections.
+ConsoleDisplay.BinaryDisplay(scene.Render()); // This actually will crush until we wont complete all 'to do' sections.

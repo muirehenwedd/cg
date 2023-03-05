@@ -14,6 +14,11 @@ public sealed class SimpleScene
         // todo:
     }
 
+    public void SetLightSource(LightSource lightSource)
+    {
+        // todo
+    }
+
     public float[,] Render()
     {
         // todo:
