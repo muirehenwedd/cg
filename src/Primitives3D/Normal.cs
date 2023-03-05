@@ -1,9 +1,14 @@
-﻿namespace Primitives3D;
+namespace Primitives3D;
 
 public struct Normal
 {
-    public Normal(Point point, Vector direction)
-    {
-        //todo
+        public Point Point { get; }
+        public Vector Direction { get; }
+        
+        public Normal(Point point, Vector direction)
+        {
+            Point = point;
+            Direction = direction.Normalize();
+        }
     }
 }
