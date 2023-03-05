@@ -8,36 +8,36 @@ public struct Vector
 
     public static Vector Add(Vector left, Vector right)
     {
-        float x = left.X + right.X;
-        float y = left.Y + right.Y;
-        float z = left.Z + right.Z;
+        var x = left.X + right.X;
+        var y = left.Y + right.Y;
+        var z = left.Z + right.Z;
         
         return new Vector(x, y, z);
     }
 
     public static Vector Subtract(Vector left, Vector right)
     {
-        float x = left.X - right.X;
-        float y = left.Y - right.Y;
-        float z = left.Z - right.Z;
+        var x = left.X - right.X;
+        var y = left.Y - right.Y;
+        var z = left.Z - right.Z;
 
         return new Vector(x, y, z);
     }
 
     public static float DotProduct(Vector left, Vector right)
     {
-        float x = left.X * right.X;
-        float y = left.Y * right.Y;
-        float z = left.Z * right.Z;
+        var x = left.X * right.X;
+        var y = left.Y * right.Y;
+        var z = left.Z * right.Z;
 
         return x + y + z;
     }
 
-    public static float CrossProduct(Vector left, Vector right)
+    public static Vector CrossProduct(Vector left, Vector right)
     {
-        float x = left.Y * right.Z - left.Z * right.Y;
-        float y = left.Z * right.X - left.X * right.Z;
-        float z = left.X * right.Y - left.Y * right.X;
+        var x = left.Y * right.Z - left.Z * right.Y;
+        var y = left.Z * right.X - left.X * right.Z;
+        var z = left.X * right.Y - left.Y * right.X;
 
         return new Vector(x, y, z);
     }
