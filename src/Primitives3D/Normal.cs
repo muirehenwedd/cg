@@ -8,7 +8,6 @@ public struct Normal
         public Normal(Point point, Vector direction)
         {
             Point = point;
-            Direction = direction.Normalize();
+            Direction = Vector.Normalize(direction);
         }
-    }
 }
