@@ -15,7 +15,7 @@ public struct Sphere : IRayIntersectable
         throw new NotImplementedException();
     }
 
-    public (Point point, Normal normal)[] CalculateIntersectionsPointsWithNormals(Ray ray)
+    public Plane[] CalculateIntersectionsPlanes(Ray ray)
     {
         // todo
         throw new NotImplementedException();
