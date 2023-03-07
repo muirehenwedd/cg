@@ -2,31 +2,31 @@ namespace Primitives3D;
 
 public struct Ray
 {
-    public Point Origin;
-    public Vector Direction;
+    public Point Origin { get; }
+    public Vector Direction { get; }
 
-    public Ray(Point origin, Vector direction)
+    public Ray(Point start, Vector direction)
     {
-        Origin = origin;
+        Origin = start;
         Direction = direction;
     }
-
-    public Ray(Point p1, Point p2)
+    
+    public Ray(Point start, Point direction)
     {
-        Origin = p1;
-        Direction = (p2 - p1).Normalize();
+        Origin = start;
+        Direction = new Vector(start, direction);
     }
-
-    public Ray(Ray other)
+    
+    public Ray(Ray original)
     {
-        Origin = other.Origin;
-        Direction = other.Direction;
+        Origin = original.Origin;
+        Direction = original.Direction;
     }
 
     public Point GetNearestPointTo(Point point)
     {
         Vector diff = point - Origin;
-        double projection = Vector.Dot(diff, Direction);
+        float projection = Vector.DotProduct(diff, Direction);
         if (projection <= 0)
         {
             return Origin;
