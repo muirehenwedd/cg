@@ -30,4 +30,12 @@ public struct Point
             float z = point.Z - vector.Z;
             return new Point(x, y, z);
         }
+        public static Vector operator -(Point p1, Point p2)
+    {
+            var x = p1.X - p2.X;
+            var y = p1.Y - p2.Y;
+            var z = p1.Z - p2.Z;
+
+            return new Vector(x, y, z);
+    }
 }
