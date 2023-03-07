@@ -2,8 +2,10 @@
 
 public struct LightSource
 {
+    public Vector Vector { get; }
+
     public LightSource(Vector vector)
     {
-        // todo
+        Vector = vector;
     }
 }
