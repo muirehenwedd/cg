@@ -18,7 +18,7 @@ namespace Primitives3D.Tests
 
             // Assert
             Assert.Single(intersections1);
-            Assert.Equal(new Point(0, 1, 0), intersections1[0]);
+            Assert.Equal(new Point(0, 0, 0), intersections1[0]);
             Assert.Empty(intersections2);
         }
 

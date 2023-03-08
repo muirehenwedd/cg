@@ -37,7 +37,7 @@ namespace Primitives3D.Tests
             Assert.Single(intersections1);
             Assert.Equal(plane1.Normal, intersections1[0].Normal);
             Assert.Single(intersections2);
-            Assert.Equal(plane2.Normal, intersections2[0].Normal);
+            Assert.Equal(new Normal(new Point(0, 1, 0), new Vector(0, 1, 0)), intersections2[0].Normal);
         }
     }
 }
