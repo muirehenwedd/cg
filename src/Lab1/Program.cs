@@ -3,10 +3,16 @@ using Primitives3D;
 
 var scene = new SimpleScene();
 
-//var sphere = new Sphere(new Point(), 1f);
-//scene.SetSphere(sphere);
+var lightSource = new SimpleLightSource(new Vector(-3, 0, 1));
+scene.SetLightSource(lightSource);
 
-// var camera=new Camera(...);
-// scene.SetCamera(camera);
+var sphere1 = new Sphere(new Point(15, 0, 0), 10);
+scene.AddRayIntersectableObject(sphere1);
 
-ConsoleOutput.BinaryDisplay(scene.Render()); // This actually will crush until we wont complete all 'to do' sections.
+//var sphere2 = new Sphere(new Point(15, 5, 10), 7);
+//scene.SetSphere(sphere2);
+
+var camera = new SimpleCamera() {PixelSize = 1};
+scene.SetCamera(camera);
+
+ConsoleOutput.ShadesDisplay(scene.Render());
