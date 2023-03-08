@@ -1,4 +1,5 @@
 ﻿using Lab1;
+using Lab1.Output;
 using Primitives3D;
 
 var scene = new SimpleScene();
@@ -21,4 +22,5 @@ scene.AddRayIntersectableObject(sphere4);
 var camera = new SimpleCamera(5, 45, 80);
 scene.SetCamera(camera);
 
-ConsoleOutput.ShadesDisplay(scene.Render());
+var output = new ConsoleShadesImageOutput();
+output.Output(scene.Render());
