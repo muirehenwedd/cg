@@ -1,11 +1,53 @@
-﻿namespace Primitives3D;
+﻿using Primitives3D.Abstractions;
 
-public struct Plane
-{
-    public Normal Normal { get; }
+ namespace Primitives3D;
+ 
+public struct Plane : IRayIntersectable
+ {
+     public Normal Normal { get; }
+ 
+@@ -8,4 +10,44 @@
+     {
+         Normal = normal;
+     }
 
-    public Plane(Normal normal)
+    public Point[] CalculateIntersectionsPoints(Ray ray)
     {
-        Normal = normal;
+        var prod = Vector.DotProduct(ray.Direction, Normal.Direction);
+
+        if (prod < 1e-6 && prod > -1e-6)
+        {
+            return Array.Empty<Point>();
+        }
+
+        var p0l0 = Normal.Point - ray.Origin;
+        var t = Vector.DotProduct(p0l0, Normal.Direction) / prod;
+        if (t < 0)
+            return Array.Empty<Point>();
+
+        return new[] {ray.Origin + ray.Direction.Multiply(t)};
+    }
+
+    public Plane[] CalculateIntersectionsPlanes(Ray ray)
+    {
+        var prod = Vector.DotProduct(ray.Direction, Normal.Direction);
+
+        if (prod < 1e-6 && prod > -1e-6)
+        {
+            return Array.Empty<Plane>();
+        }
+
+        var p0l0 = Normal.Point - ray.Origin;
+        var t = Vector.DotProduct(p0l0, Normal.Direction) / prod;
+        if (t < 0)
+            return Array.Empty<Plane>();
+
+        var point = ray.Origin + ray.Direction.Multiply(t);
+        var direction = prod < 0 ? Normal.Direction : Normal.Direction.Multiply(-1);
+
+        return new[]
+        {
+            new Plane(new Normal(point, direction))
+        }
     }
 }
