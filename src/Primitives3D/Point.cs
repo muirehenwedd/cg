@@ -38,4 +38,6 @@ public struct Point
 
             return new Vector(x, y, z);
     }
+
+        public float Square => X * X + Y * Y + Z * Z;
 }
