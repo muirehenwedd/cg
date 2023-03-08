@@ -3,11 +3,9 @@
 public struct Plane
 {
     public Normal Normal { get; }
-    public Point Point { get; }
 
-    public Plane(Normal normal, Point point)
+    public Plane(Normal normal)
     {
         Normal = normal;
-        Point = point;
     }
 }
