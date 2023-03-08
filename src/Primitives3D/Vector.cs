@@ -11,7 +11,7 @@ public struct Vector
         var x = left.X + right.X;
         var y = left.Y + right.Y;
         var z = left.Z + right.Z;
-        
+
         return new Vector(x, y, z);
     }
 
@@ -41,6 +41,7 @@ public struct Vector
 
         return new Vector(x, y, z);
     }
+
     public static Vector operator *(Vector v, float scalar)
     {
         var x = v.X * scalar;
@@ -49,13 +50,15 @@ public struct Vector
 
         return new Vector(x, y, z);
     }
+
     public static Vector operator *(float scalar, Vector vector)
     {
         return vector * scalar;
     }
+
     public static Vector Normalize(Vector vector)
     {
-        float length = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
+        float length = (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
 
         if (length == 0)
         {
@@ -64,17 +67,21 @@ public struct Vector
 
         return new Vector(vector.X / length, vector.Y / length, vector.Z / length);
     }
+
     public Vector(Point start, Point direction) : this()
     {
         X = direction.X - start.X;
         Y = direction.Y - start.Y;
         Z = direction.Z - start.Z;
     }
+
     public Vector(float x, float y, float z)
     {
         X = x;
         Y = y;
         Z = z;
     }
-    
+
+    public Vector Multiply(float multiplier) => new(X * multiplier, Y * multiplier, Z * multiplier);
+    public float Length => MathF.Sqrt(X * X + Y * Y + Z * Z);
 }
