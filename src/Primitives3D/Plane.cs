@@ -1,15 +1,15 @@
 ﻿using Primitives3D.Abstractions;
 
- namespace Primitives3D;
- 
+namespace Primitives3D;
+
 public struct Plane : IRayIntersectable
- {
-     public Normal Normal { get; }
- 
-@@ -8,4 +10,44 @@
-     {
-         Normal = normal;
-     }
+{
+    public Normal Normal { get; }
+
+    public Plane(Normal normal)
+    {
+        Normal = normal;
+    }
 
     public Point[] CalculateIntersectionsPoints(Ray ray)
     {
@@ -48,6 +48,6 @@ public struct Plane : IRayIntersectable
         return new[]
         {
             new Plane(new Normal(point, direction))
-        }
+        };
     }
 }
