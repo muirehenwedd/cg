@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Primitives3D\Primitives3D.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+    </ItemGroup>
+
 </Project>
