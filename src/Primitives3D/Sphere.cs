@@ -19,7 +19,7 @@ public struct Sphere : IRayIntersectable
         Radius = new Vector(radius, 0f, 0f);
     }
 
-    public Point[] CalculateIntersectionsPoints(Ray ray)
+    public Point? CalculateIntersectionsPoint(Ray ray)
     {
         var k = ray.Origin - Centre;
 
@@ -32,12 +32,12 @@ public struct Sphere : IRayIntersectable
         switch (discriminant)
         {
             case < 0:
-                return Array.Empty<Point>();
+                return null;
             case 0:
             {
                 var root = -b / 2 * a;
 
-                return root < 0 ? Array.Empty<Point>() : new[] {ray.Origin + ray.Direction.Multiply(root)};
+                return root < 0 ? null : ray.Origin + ray.Direction.Multiply(root);
             }
             default:
             {
@@ -47,24 +47,25 @@ public struct Sphere : IRayIntersectable
                 var root2 = (-b - discriminantSquareRoot) / (2 * a);
 
                 if (root1 < 0 && root2 < 0)
-                    return Array.Empty<Point>();
+                    return null;
 
                 if (root1 < 0)
-                    return new[] {ray.Origin + ray.Direction.Multiply(root2)};
+                    return ray.Origin + ray.Direction.Multiply(root2);
 
                 if (root2 < 0)
-                    return new[] {ray.Origin + ray.Direction.Multiply(root1)};
+                    return ray.Origin + ray.Direction.Multiply(root1);
 
-                return new[]
-                {
-                    ray.Origin + ray.Direction.Multiply(root1),
-                    ray.Origin + ray.Direction.Multiply(root2)
-                };
+                var point1 = ray.Origin + ray.Direction.Multiply(root1);
+                var point2 = ray.Origin + ray.Direction.Multiply(root2);
+
+                return Point.CalculateDistance(ray.Origin, point1) < Point.CalculateDistance(ray.Origin, point2)
+                    ? point1
+                    : point2;
             }
         }
     }
 
-    public Plane[] CalculateIntersectionsPlanes(Ray ray)
+    public Plane? CalculateIntersectionsPlane(Ray ray)
     {
         var k = ray.Origin - Centre;
 
@@ -77,12 +78,12 @@ public struct Sphere : IRayIntersectable
         switch (discriminant)
         {
             case < 0:
-                return Array.Empty<Plane>();
+                return null;
             case 0:
             {
                 var root = -b / 2 * a;
 
-                return root < 0 ? Array.Empty<Plane>() : new[] {CalculatePlane(root, Centre)};
+                return root < 0 ? null : CalculatePlane(root, Centre);
             }
             default:
             {
@@ -92,19 +93,20 @@ public struct Sphere : IRayIntersectable
                 var root2 = (-b - discriminantSquareRoot) / (2 * a);
 
                 if (root1 < 0 && root2 < 0)
-                    return Array.Empty<Plane>();
+                    return null;
 
                 if (root1 < 0)
-                    return new[] {CalculatePlane(root2, Centre)};
+                    return CalculatePlane(root2, Centre);
 
                 if (root2 < 0)
-                    return new[] {CalculatePlane(root1, Centre)};
+                    return CalculatePlane(root1, Centre);
 
-                return new[]
-                {
-                    CalculatePlane(root1, Centre),
-                    CalculatePlane(root2, Centre)
-                };
+                var point1 = ray.Origin + ray.Direction.Multiply(root1);
+                var point2 = ray.Origin + ray.Direction.Multiply(root2);
+
+                return Point.CalculateDistance(ray.Origin, point1) < Point.CalculateDistance(ray.Origin, point2)
+                    ? CalculatePlane(root1, Centre)
+                    : CalculatePlane(root2, Centre);
             }
         }
 

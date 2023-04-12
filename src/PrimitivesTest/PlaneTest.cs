@@ -12,13 +12,13 @@ namespace Primitives3D.Tests
             var ray2 = new Ray(new Point(0, 1, 0), new Vector(0, 1, 0));
 
             // Act
-            var intersections1 = plane.CalculateIntersectionsPoints(ray1);
-            var intersections2 = plane.CalculateIntersectionsPoints(ray2);
+            var intersections1 = plane.CalculateIntersectionsPoint(ray1);
+            var intersections2 = plane.CalculateIntersectionsPoint(ray2);
 
             // Assert
-            Assert.Single(intersections1);
-            Assert.Equal(new Point(0, 0, 0), intersections1[0]);
-            Assert.Empty(intersections2);
+            Assert.NotNull(intersections1);
+            Assert.Equal(new Point(0, 0, 0), intersections1);
+            Assert.Null(intersections2);
         }
 
         [Fact]
@@ -30,14 +30,14 @@ namespace Primitives3D.Tests
             var ray = new Ray(new Point(0, 1, 0), new Vector(0, -1, 0));
 
             // Act
-            var intersections1 = plane1.CalculateIntersectionsPlanes(ray);
-            var intersections2 = plane2.CalculateIntersectionsPlanes(ray);
+            var intersections1 = plane1.CalculateIntersectionsPlane(ray);
+            var intersections2 = plane2.CalculateIntersectionsPlane(ray);
 
             // Assert
-            Assert.Single(intersections1);
-            Assert.Equal(plane1.Normal, intersections1[0].Normal);
-            Assert.Single(intersections2);
-            Assert.Equal(new Normal(new Point(0, 1, 0), new Vector(0, 1, 0)), intersections2[0].Normal);
+            Assert.NotNull(intersections1);
+            Assert.Equal(plane1.Normal, intersections1.Value.Normal);
+            Assert.NotNull(intersections2);
+            Assert.Equal(new Normal(new Point(0, 1, 0), new Vector(0, 1, 0)), intersections2.Value.Normal);
         }
     }
 }

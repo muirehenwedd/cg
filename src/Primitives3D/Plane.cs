@@ -11,43 +11,40 @@ public struct Plane : IRayIntersectable
         Normal = normal;
     }
 
-    public Point[] CalculateIntersectionsPoints(Ray ray)
+    public Point? CalculateIntersectionsPoint(Ray ray)
     {
         var prod = Vector.DotProduct(ray.Direction, Normal.Direction);
 
         if (prod < 1e-6 && prod > -1e-6)
         {
-            return Array.Empty<Point>();
+            return null;
         }
 
         var p0l0 = Normal.Point - ray.Origin;
         var t = Vector.DotProduct(p0l0, Normal.Direction) / prod;
         if (t < 0)
-            return Array.Empty<Point>();
+            return null;
 
-        return new[] {ray.Origin + ray.Direction.Multiply(t)};
+        return ray.Origin + ray.Direction.Multiply(t);
     }
 
-    public Plane[] CalculateIntersectionsPlanes(Ray ray)
+    public Plane? CalculateIntersectionsPlane(Ray ray)
     {
         var prod = Vector.DotProduct(ray.Direction, Normal.Direction);
 
         if (prod < 1e-6 && prod > -1e-6)
         {
-            return Array.Empty<Plane>();
+            return null;
         }
 
         var p0l0 = Normal.Point - ray.Origin;
         var t = Vector.DotProduct(p0l0, Normal.Direction) / prod;
         if (t < 0)
-            return Array.Empty<Plane>();
+            return null;
 
         var point = ray.Origin + ray.Direction.Multiply(t);
         var direction = prod < 0 ? Normal.Direction : Normal.Direction.Multiply(-1);
 
-        return new[]
-        {
-            new Plane(new Normal(point, direction))
-        };
+        return new Plane(new Normal(point, direction));
     }
 }

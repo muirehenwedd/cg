@@ -2,6 +2,6 @@
 
 public interface IRayIntersectable
 {
-    Point[] CalculateIntersectionsPoints(Ray ray);
-    Plane[] CalculateIntersectionsPlanes(Ray ray);
+    Point? CalculateIntersectionsPoint(Ray ray);
+    Plane? CalculateIntersectionsPlane(Ray ray);
 }

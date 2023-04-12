@@ -11,9 +11,9 @@ public class SphereIntersectionTest
         Ray ray
     )
     {
-        var points = sphere.CalculateIntersectionsPoints(ray);
+        var points = sphere.CalculateIntersectionsPoint(ray);
 
-        Assert.NotEmpty(points);
+        Assert.NotNull(points);
     }
 
     [Theory]
@@ -23,8 +23,8 @@ public class SphereIntersectionTest
         Ray ray
     )
     {
-        var points = sphere.CalculateIntersectionsPoints(ray);
+        var points = sphere.CalculateIntersectionsPoint(ray);
 
-        Assert.Empty(points);
+        Assert.Null(points);
     }
 }

@@ -13,34 +13,32 @@ public struct Disc : IRayIntersectable
         Radius = radius;
     }
 
-    public Point[] CalculateIntersectionsPoints(Ray ray)
+    public Point? CalculateIntersectionsPoint(Ray ray)
     {
-        var intersectionsWithPlane = Plane.CalculateIntersectionsPoints(ray);
+        var intersection = Plane.CalculateIntersectionsPoint(ray);
 
-        if (intersectionsWithPlane.Length == 0)
-            return intersectionsWithPlane;
+        if (intersection is null)
+            return null;
 
-        var point = intersectionsWithPlane[0];
-        var distance = (Plane.Normal.Point - point).Length;
+        var distance = (Plane.Normal.Point - intersection.Value).Length;
 
         if (distance <= Radius)
-            return intersectionsWithPlane;
+            return intersection;
 
-        return Array.Empty<Point>();
+        return null;
     }
-   public Plane[] CalculateIntersectionsPlanes(Ray ray)
+   public Plane? CalculateIntersectionsPlane(Ray ray)
     {
-        var intersectionsWithPlane = Plane.CalculateIntersectionsPlanes(ray);
+        var intersection = Plane.CalculateIntersectionsPlane(ray);
 
-        if (intersectionsWithPlane.Length == 0)
-            return intersectionsWithPlane;
-
-        var plane = intersectionsWithPlane[0];
-        var distance = (Plane.Normal.Point - plane.Normal.Point).Length;
+        if (intersection is null)
+            return null;
+        
+        var distance = (Plane.Normal.Point - intersection.Value.Normal.Point).Length;
 
         if (distance <= Radius)
-            return intersectionsWithPlane;
+            return intersection;
 
-        return Array.Empty<Plane>();
+        return null;
     }
 }

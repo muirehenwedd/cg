@@ -40,4 +40,9 @@ public struct Point
     }
 
         public float Square => X * X + Y * Y + Z * Z;
+
+        public static float CalculateDistance(Point left, Point right)
+        {
+            return MathF.Sqrt(MathF.Pow(left.X - right.X, 2) + MathF.Pow(left.Y - right.Y, 2) + MathF.Pow(left.X - right.X, 2));
+        }
 }
