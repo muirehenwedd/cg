@@ -43,14 +43,27 @@ public sealed class SimpleScene : IScene
                 var pixelCenter = centersOfPixels[i, j];
                 var traceRay = new Ray(_camera.ViewPoint, pixelCenter);
 
-                var closestIntersection = _rayIntersectables
-                    .SelectMany(o => o.CalculateIntersectionsPlanes(traceRay))
-                    .OrderBy(plane => (_camera.ViewPoint - plane.Normal.Point).Length)
-                    .ToArray();
+                var minimalDistance = float.MaxValue;
+                Plane? closestPlane = null;
 
-                renderResult[i, j] = closestIntersection.Length == 0
+                for (var k = 0; k < _rayIntersectables.Count; k++)
+                {
+                    var intersection = _rayIntersectables[k].CalculateIntersectionsPlane(traceRay);
+
+                    if (intersection is null)
+                        continue;
+
+                    var distance = (_camera.ViewPoint - intersection.Value.Normal.Point).Length;
+
+                    if (!(distance < minimalDistance)) continue;
+
+                    minimalDistance = distance;
+                    closestPlane = intersection;
+                }
+
+                renderResult[i, j] = closestPlane is null
                     ? 0
-                    : Vector.DotProduct(closestIntersection[0].Normal.Direction, _lightSource.Direction);
+                    : Vector.DotProduct(closestPlane.Value.Normal.Direction, _lightSource.Direction);
             }
         }
 
