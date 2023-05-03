@@ -5,7 +5,7 @@ using Converter.Abstractions;
 
 namespace Reader.Png
 {
-    public class PngBitmapReader : IBitmapReader
+    public class PngImageReader : IImageReader
     {
         public bool CanRead(byte[] bytes)
         {
@@ -13,9 +13,9 @@ namespace Reader.Png
 
             var pngMagicNumber = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
             return pngMagicNumber.SequenceEqual(bytes.Take(8));
-        }
+    }
 
-        public Bitmap Read(byte[] bytes)
+        public MediateImage Read(byte[] bytes)
         {
             using var memoryStream = new MemoryStream(bytes);
             using var reader = new BinaryReader(memoryStream);
@@ -45,8 +45,20 @@ namespace Reader.Png
             // Decode the image data
             var decodedData = PngDecoder.DecodeImageData(imageData, header.Width, header.Height, header.BitDepth, header.ColorType);
 
-            // Create and return the bitmap
-            return new Bitmap(decodedData, header.Width, header.Height);
+            // Create a MediateImage from decoded data
+            var mediateImage = new MediateImage(header.Height, header.Width);
+            for (int y = 0; y < header.Height; y++)
+            {
+                for (int x = 0; x < header.Width; x++)
+                {
+                    var pixelIndex = y * header.Width + x;
+                    var pixel = decodedData[pixelIndex];
+                    mediateImage.Pixels[y, x] = new Pixel(pixel.R, pixel.G, pixel.B);
+                }
+            }
+
+            // Return the MediateImage
+            return mediateImage;
         }
     }
 }

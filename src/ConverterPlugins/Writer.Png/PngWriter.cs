@@ -31,8 +31,11 @@ namespace Writer.Png
 
             // Write the IDAT chunk
             var imageData = PngEncoder.EncodeImageData(image.Pixels, image.Width, image.Height);
-            var idatChunk = new PngChunk("IDAT", imageData);
-            idatChunk.WriteToBinaryWriter(writer);
+            var idatChunks = PngEncoder.CreateIDATChunks(imageData);
+            foreach (var idatChunk in idatChunks)
+            {
+                idatChunk.WriteToBinaryWriter(writer);
+            }
 
             // Write the IEND chunk
             var iendChunk = new PngChunk("IEND", new byte[] { });
