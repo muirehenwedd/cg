@@ -51,6 +51,17 @@ public struct Vector
         return new Vector(x, y, z);
     }
 
+    public static bool AreParallel(Vector v1, Vector v2)
+    {
+        var crossProduct = CrossProduct(v1, v2);
+        return crossProduct.Length < 1e-6;
+    }
+
+    public static Vector operator +(Vector left, Vector right)
+    {
+        return Add(left, right);
+    }
+
     public static Vector operator *(float scalar, Vector vector)
     {
         return vector * scalar;
@@ -58,7 +69,7 @@ public struct Vector
 
     public static Vector Normalize(Vector vector)
     {
-        float length = (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
+        var length = (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
 
         if (length == 0)
         {
