@@ -1,5 +1,6 @@
 using System.Buffers.Binary;
 using System.IO.Compression;
+using System.Text;
 using Converter;
 using Converter.Abstractions;
 
@@ -85,7 +86,7 @@ public class PngImageReader : IImageReader
         while (offset < bytes.Length - 12)
         {
             var length = BinaryPrimitives.ReadInt32BigEndian(bytes.AsSpan(offset));
-            var type = bytes.AsSpan(offset + 4, 4).ToString();
+            var type = Encoding.ASCII.GetString(bytes.AsSpan(offset + 4, 4));
 
             if (type == chunkType)
             {
