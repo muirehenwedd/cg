@@ -1,13 +1,25 @@
+using System.Numerics;
+
 namespace Primitives3D;
 
 public class Matrix
 {
     private readonly float[,] _values;
 
+    private static readonly Matrix _identity = new Matrix()
+    {
+        [0, 0] = 1,
+        [1, 1] = 1,
+        [2, 2] = 1,
+        [3, 3] = 1
+    };
+
     public Matrix()
     {
         _values = new float[4, 4];
     }
+
+    public static Matrix Identity => _identity;
 
     public float this[int row, int col]
     {
@@ -26,6 +38,24 @@ public class Matrix
         result[0, 3] = tx;
         result[1, 3] = ty;
         result[2, 3] = tz;
+
+        return result;
+    }
+
+    public Matrix Multiply(Matrix other)
+    {
+        var result = new Matrix();
+
+        for (var i = 0; i < 4; i++)
+        {
+            for (var j = 0; j < 4; j++)
+            {
+                for (var k = 0; k < 4; k++)
+                {
+                    result[i, j] += this[i, k] * other[k, j];
+                }
+            }
+        }
 
         return result;
     }
