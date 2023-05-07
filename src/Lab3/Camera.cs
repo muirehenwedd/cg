@@ -88,4 +88,10 @@ public class Camera : ICamera
 
         Array.Copy(rotatedArray, array, array.Length);
     }
+
+    public void Transform(Matrix transformationMatrix)
+    {
+        ViewPoint = transformationMatrix.Transform(ViewPoint);
+        ViewDirection = transformationMatrix.Transform(ViewDirection);
+    }
 }
