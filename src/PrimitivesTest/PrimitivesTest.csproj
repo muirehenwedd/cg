@@ -25,4 +25,8 @@
       <ProjectReference Include="..\Primitives3D\Primitives3D.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Intersection\TriangleTests" />
+    </ItemGroup>
+
 </Project>
