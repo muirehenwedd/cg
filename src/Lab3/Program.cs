@@ -1,11 +1,28 @@
 ﻿using Lab1;
 using Lab3;
 using Lab3.Abstractions;
+using Lab3.Configuration;
+using Lab3.Configuration.Abstractions;
 using Primitives3D;
 using Writer.Bmp;
 
+IConfigParser configParser = new ConfigParser();
+var config = configParser.Parse(args);
+
+IConfigValidator configValidator = new ConfigValidator();
+configValidator.Validate(config);
+
 var reader = new ObjReader();
-var triangles = reader.ReadObjFile("cow.obj");
+var triangles = reader.ReadObjFile(config.InputFilePath);
+
+ITransformationBuilder transformationBuilder = TransformationBuilder.Create();
+var transformation = transformationBuilder
+    .RotateAroundZ(-25)
+    .Scale(1, 1, 1.5f)
+    .Translate(0, 0, 0.1f)
+    .BuildTransformation();
+
+transformation.Apply(triangles);
 
 var scene = new Scene();
 
@@ -26,5 +43,5 @@ IGrayscaleMatrixToMediateImageConverter converter = new GrayscaleMatrixToMediate
 var image = converter.Convert(resultMatrix);
 var writer = new BmpWriter();
 
-using var file = new FileStream("output.bmp", FileMode.OpenOrCreate);
+using var file = new FileStream(config.OutputFilePath, FileMode.OpenOrCreate);
 file.Write(writer.Write(image));
