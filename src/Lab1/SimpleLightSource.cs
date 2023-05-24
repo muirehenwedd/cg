@@ -9,6 +9,6 @@ public struct SimpleLightSource : ILightSource
 
     public SimpleLightSource(Vector direction)
     {
-        Direction = Vector.Normalize(direction);
+        Direction = Vector.Normalize(direction).Multiply(-1);
     }
 }

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reader.Png", "ConverterPlug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer.Png", "ConverterPlugins\Writer.Png\Writer.Png.csproj", "{2C381F33-34FF-42CE-A365-D5ADE6AD12BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab3", "Lab3\Lab3.csproj", "{A9D33196-AE20-47AF-AF5F-3DED8E545C9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,5 +80,9 @@ Global
 		{2C381F33-34FF-42CE-A365-D5ADE6AD12BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C381F33-34FF-42CE-A365-D5ADE6AD12BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C381F33-34FF-42CE-A365-D5ADE6AD12BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9D33196-AE20-47AF-AF5F-3DED8E545C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D33196-AE20-47AF-AF5F-3DED8E545C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D33196-AE20-47AF-AF5F-3DED8E545C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D33196-AE20-47AF-AF5F-3DED8E545C9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
